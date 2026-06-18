@@ -6,6 +6,7 @@
 > on a schedule. Each run writes the date/time to `sandbox/last-run.txt`
 > in your local repo and pushes it to the remote `main` branch.
 > Only affects remote main; local untouched. Uses git worktree for isolation.
+> Steps 1-2 are file operations.Steps 3-5 use PowerShell.
 
 ## 1. Copy the script
 
@@ -31,7 +32,7 @@ gh auth login
 git config --global credential.helper manager
 ```
 
-## 4. Run once to confirm
+## 4. Run once to confirm (PowerShell)
 
 If you edited `$RepoPath` in the script (step 2):
 
@@ -50,7 +51,7 @@ cd C:\Tools
 Success prints `Pushed to main: ...` (or `No change.`). Verify
 `sandbox/last-run.txt` on `main` in GitHub.
 
-## 5. Make it run automatically
+## 5. Make it run automatically (PowerShell)
 
 Registers a Task Scheduler task (weekdays 9:00 AM & 3:00 PM) for the repo
 configured in the script (step 2):
@@ -59,7 +60,7 @@ configured in the script (step 2):
 .\sandbox-timestamp.ps1 -Register
 ```
 
-Manage it:
+Manage it (PowerShell):
 
 ```powershell
 Start-ScheduledTask      -TaskName "GitOps-SandboxTimestamp"   # run now
