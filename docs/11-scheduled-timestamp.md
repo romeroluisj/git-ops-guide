@@ -63,10 +63,10 @@ configured in the script (step 2):
 Manage it (PowerShell):
 
 ```powershell
-Start-ScheduledTask      -TaskName "GitOps-SandboxTimestamp"   # run now
-Get-ScheduledTaskInfo    -TaskName "GitOps-SandboxTimestamp"   # next run
+Start-ScheduledTask      -TaskName "GitOps-SandboxTimestamp"   # run task now
+Get-ScheduledTaskInfo    -TaskName "GitOps-SandboxTimestamp"   # next task run
 Unregister-ScheduledTask -TaskName "GitOps-SandboxTimestamp" `
-  -Confirm:$false   # delete
+  -Confirm:$false   # delete task
 ```
 
 Done.
