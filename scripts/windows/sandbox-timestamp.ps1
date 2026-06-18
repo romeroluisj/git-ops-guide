@@ -43,8 +43,11 @@ if (-not (Test-Path -LiteralPath (Join-Path $RepoPath ".git"))) {
     exit 1
 }
 
-# Dedicated worktree (in AppData) detached at origin/main: isolated from your
-# normal checkout, so the current branch and any uncommitted work are untouched.
+# Dedicated worktree detached at origin/main: a separate checkout isolated from
+# your normal repo, so the current branch and any uncommitted work are untouched.
+# Created on first run, reused after, at:
+#   C:\Users\<you>\AppData\Local\<repo-name>-timestamp-wt
+# It lives OUTSIDE your repo; the script never modifies your normal checkout.
 $wt = Join-Path $env:LOCALAPPDATA ((Split-Path $RepoPath -Leaf) + "-timestamp-wt")
 git -C $RepoPath fetch origin $Branch
 git -C $RepoPath worktree prune
