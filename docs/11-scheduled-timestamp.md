@@ -16,7 +16,7 @@ Open the script and set `$RepoPath` (line 16) to your local clone. Its
 `origin` is the remote that receives the push.
 
 ```powershell
-[string]$RepoPath = "C:\Users\you\Dev\github\git-ops-guide"
+[string]$RepoPath = "C:\Users\$env:USERNAME\path\to\your\local_repo_name"
 ```
 
 ## 3. One-time setup (PowerShell)
@@ -32,9 +32,18 @@ git config --global credential.helper manager
 
 ## 4. Run once to confirm
 
+If you edited `$RepoPath` in the script (step 2):
+
 ```powershell
 cd C:\Tools
-.\sandbox-timestamp.ps1 -RepoPath "C:\Users\you\Dev\github\git-ops-guide"
+.\sandbox-timestamp.ps1
+```
+
+Or override via command line:
+
+```powershell
+cd C:\Tools
+.\sandbox-timestamp.ps1 -RepoPath "C:\Users\$env:USERNAME\path\to\your\local_repo_name"
 ```
 
 Success prints `Pushed to main: ...` (or `No change.`). Verify
@@ -46,7 +55,7 @@ Registers a Task Scheduler task (weekdays 9:00 AM & 3:00 PM):
 
 ```powershell
 .\sandbox-timestamp.ps1 -Register `
-  -RepoPath "C:\Users\you\Dev\github\git-ops-guide"
+  -RepoPath "C:\Users\$env:USERNAME\path\to\your\local_repo_name"
 ```
 
 Manage it:
