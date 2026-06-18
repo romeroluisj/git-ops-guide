@@ -12,19 +12,37 @@
 
 param(
     [switch]$Register,                              # register task?
-    # Set this to your local repo path (or pass -RepoPath).
-    [string]$RepoPath = "C:\Users\$env:USERNAME\Dev\github\git-ops-guide",
+    # Repo path: leave empty to use saved config; or pass -RepoPath.
+    [string]$RepoPath = "",                         # explicit override
     [string]$FileName = "last-run.txt",             # output file
     [string]$Branch   = "main",                     # target branch
-    [string]$TaskName = "GitOps-SandboxTimestamp"   # task name
+    [string]$TaskName = "GitOps-SandboxTimestamp",  # task name
+    # Saved config (single source of truth for the repo path).
+    [string]$ConfigPath = "$env:LOCALAPPDATA\sandbox-timestamp\config.json"
 )
 
 $ErrorActionPreference = "Stop"                     # stop on errors
 
+# Resolve repo path. Precedence: -RepoPath > saved config > default.
+$DefaultRepoPath = "C:\Users\$env:USERNAME\Dev\github\git-ops-guide"
+if ([string]::IsNullOrWhiteSpace($RepoPath)) {       # no explicit override?
+    if (Test-Path -LiteralPath $ConfigPath) {        # try saved config
+        try {
+            $cfg = Get-Content -LiteralPath $ConfigPath -Raw | ConvertFrom-Json
+            if ($cfg.RepoPath) { $RepoPath = $cfg.RepoPath }
+        } catch { }                                  # ignore bad config
+    }
+}
+if ([string]::IsNullOrWhiteSpace($RepoPath)) {       # still none?
+    $RepoPath = $DefaultRepoPath                      # last-resort default
+}
+
 if ($Register) {
     $script = $MyInvocation.MyCommand.Path         # get script path
+    # Run bare (no -RepoPath): the task reads the saved config at runtime,
+    # so changing the config updates every future run automatically.
     $action = New-ScheduledTaskAction -Execute "powershell.exe" `
-        -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$script`" -RepoPath `"$RepoPath`""  # task action
+        -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$script`""  # task action
     $days = @("Monday","Tuesday","Wednesday","Thursday","Friday")  # weekdays
     $triggers = @(
         (New-ScheduledTaskTrigger -Weekly -DaysOfWeek $days -At 9:00AM),  # 9AM trigger
@@ -39,7 +57,7 @@ if ($Register) {
 }
 
 if (-not (Test-Path -LiteralPath (Join-Path $RepoPath ".git"))) {  # validate repo
-    Write-Host "ERROR: '$RepoPath' is not a Git repo. Edit -RepoPath." -ForegroundColor Red
+    Write-Host "ERROR: '$RepoPath' is not a Git repo. Re-run the installer or pass -RepoPath." -ForegroundColor Red
     exit 1
 }
 
