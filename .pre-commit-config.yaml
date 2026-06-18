@@ -1,0 +1,8 @@
+# Runs the same Markdown linter as the "Validate Docs" GitHub Action, pinned
+# to the identical version, so lint problems are caught locally on every
+# `git commit` instead of failing in CI. Activate once with: pre-commit install
+repos:
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.13.0
+    hooks:
+      - id: markdownlint-cli2
