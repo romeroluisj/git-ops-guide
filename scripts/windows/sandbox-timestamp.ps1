@@ -2,9 +2,15 @@
 # Writes current date/time to sandbox/last-run.txt, commits & pushes.
 # Run with -Register to schedule it (weekdays 9AM & 3PM); without it to do the work.
 # Usage: .\sandbox-timestamp.ps1 [-Register] -RepoPath "C:\path\to\git-ops-guide"
+#
+# Test now (PowerShell, from this folder):
+#   Set-ExecutionPolicy -Scope CurrentUser RemoteSigned   # one-time, if needed
+#   .\sandbox-timestamp.ps1                               # runs now; expect green "Pushed: ..."
+#   git push fails? run 'gh auth login' once, then retry.
 
 param(
     [switch]$Register,
+    # Set this to your local repo path (or pass -RepoPath).
     [string]$RepoPath = "C:\Users\$env:USERNAME\Dev\github\git-ops-guide",
     [string]$FileName = "last-run.txt",
     [string]$TaskName = "GitOps-SandboxTimestamp"
