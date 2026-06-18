@@ -13,7 +13,7 @@ Copy `sandbox-timestamp.ps1` to any folder. Recommended: `C:\Tools`.
 
 ## 2. Set the local repo path
 
-Open the script and set `$RepoPath` (line 16) to your local clone. Its
+Open the script and set `$RepoPath` to your local clone. Its
 `origin` is the remote that receives the push.
 
 ```powershell
