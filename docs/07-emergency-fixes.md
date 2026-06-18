@@ -25,18 +25,21 @@
 ## 1. Undo a Commit (Not Yet Pushed)
 
 ### Keep my changes (staged)
+
 ```powershell
 git reset --soft HEAD~1
 # Your changes are back in the staging area, ready to re-commit
 ```
 
 ### Keep my changes (unstaged)
+
 ```powershell
 git reset --mixed HEAD~1
 # Your changes are back in your working directory (not staged)
 ```
 
 ### Discard everything from the last commit
+
 ```powershell
 git reset --hard HEAD~1
 # WARNING: changes are gone permanently
@@ -55,6 +58,7 @@ git reset --soft <commit-hash>
 ```
 
 Find the hash with:
+
 ```powershell
 git log --oneline -10
 ```
@@ -130,7 +134,8 @@ git stash clear
 
 ## 6. Undo a Commit That Has Already Been Pushed
 
-> **Do NOT use `git reset` on pushed commits shared with others** — it rewrites history and breaks everyone else's local copy.
+> **Do NOT use `git reset` on pushed commits shared with others** — it
+> rewrites history and breaks everyone else's local copy.
 > Use `git revert` instead — it creates a new commit that undoes the change safely.
 
 ```powershell
@@ -175,6 +180,7 @@ git rebase -i HEAD~3
 ```
 
 In the editor, change `pick` to:
+
 - `squash` (or `s`) — combine with previous commit
 - `reword` (or `r`) — edit the commit message
 - `drop` (or `d`) — delete the commit entirely
@@ -204,5 +210,6 @@ git checkout main -- path/to/file.cs
 ---
 
 ## References
+
 - [Pro Git — Reset Demystified](https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified)
 - [GitHub Docs — Reverting a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/reverting-a-pull-request)

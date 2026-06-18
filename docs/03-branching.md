@@ -115,7 +115,7 @@ git checkout --track origin/feature/their-feature
 
 ## Branching Strategy — Recommended for Azure/GitHub Teams
 
-```
+```text
 main (or master)          ← protected, always deployable
  └─ release/1.2.0         ← release candidate branches
  └─ feature/user-auth     ← feature branches (from main)
@@ -124,16 +124,19 @@ main (or master)          ← protected, always deployable
 ```
 
 **Rules:**
+
 - Never commit directly to `main` or `master`.
 - All changes go through Pull Requests.
 - Feature branches live short — merge them within a few days to avoid drift.
-- Use Azure DevOps **Branch Policies** or GitHub **Branch Protection Rules** to enforce this.
+- Use Azure DevOps **Branch Policies** or GitHub **Branch Protection Rules**
+  to enforce this.
 
 ---
 
 ## Azure DevOps Branch Policies (Quick Reference)
 
 To configure in Azure DevOps:
+
 1. Go to **Repos → Branches**.
 2. Click the `...` menu next to `main` → **Branch policies**.
 3. Enable:
@@ -145,5 +148,6 @@ To configure in Azure DevOps:
 ---
 
 ## References
+
 - [Microsoft — Azure DevOps Branching Guidance](https://learn.microsoft.com/en-us/azure/devops/repos/git/git-branching-guidance)
 - [GitHub Docs — Branch protection rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)

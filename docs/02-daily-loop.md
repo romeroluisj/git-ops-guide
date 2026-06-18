@@ -6,7 +6,7 @@
 
 ## The 8-Step Daily Workflow
 
-```
+```text
 1. Switch to the default branch
 2. Pull latest changes
 3. Create your feature branch
@@ -69,7 +69,8 @@ Following [Conventional Commits](https://www.conventionalcommits.org/):
 | `ci:` | CI/CD pipeline changes |
 
 Examples:
-```
+
+```text
 feat: add user login endpoint
 fix: correct null check in order processor
 docs: update branching guide
@@ -127,5 +128,6 @@ git stash pop
 ---
 
 ## References
+
 - [GitHub Docs — GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow)
 - [Conventional Commits spec](https://www.conventionalcommits.org/)

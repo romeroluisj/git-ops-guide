@@ -1,6 +1,7 @@
 # Sandbox — Practice Area
 
-This folder is a **safe, dedicated practice space**. Nothing here affects real work. You are encouraged to experiment freely.
+This folder is a **safe, dedicated practice space**. Nothing here affects
+real work. You are encouraged to experiment freely.
 
 ---
 
@@ -19,12 +20,14 @@ Follow these steps to practice the complete Git/GitHub workflow.
 ### Step 1 — Clone the repo (if you haven't already)
 
 **PowerShell / Git Bash:**
+
 ```powershell
 git clone git@github.com:<org>/git-ops-guide.git
 cd git-ops-guide
 ```
 
 Or with HTTPS:
+
 ```powershell
 git clone https://github.com/<org>/git-ops-guide.git
 cd git-ops-guide
@@ -81,7 +84,8 @@ git push origin practice/your-name
 
 ### Bonus Exercise — Intentional Merge Conflict
 
-1. Ask a coworker to edit the same line in `sandbox/conflict-test.md` on their own branch.
+1. Ask a coworker to edit the same line in `sandbox/conflict-test.md` on
+   their own branch.
 2. Both of you push and open PRs.
 3. The second PR to merge will have a conflict.
 4. Practice resolving the conflict in VS Code, then push the resolution.

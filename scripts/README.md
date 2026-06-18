@@ -1,27 +1,32 @@
 # Scripts
 
-Automation scripts for Windows developers. All scripts require **Git for Windows** installed.
+Automation scripts for Windows developers. All scripts require
+**Git for Windows** installed.
 
 ## `windows/`
 
-| Script | Shell | Purpose |
-|---|---|---|
-| `setup-git-config.ps1` | PowerShell | Configure global Git identity and recommended settings |
-| `setup-git-config.bat` | Batch (CMD) | Same as above — for environments where PowerShell is restricted |
-| `new-feature-branch.ps1` | PowerShell | Prompt for branch type/name, pull latest main/master, create and push branch |
-| `sync-main.ps1` | PowerShell | Safely sync local main/master with remote at the start of the day |
-| `sandbox-timestamp.ps1` | PowerShell | Overwrite `sandbox/last-run.txt` with the current timestamp, commit & push. Use `-Register` to schedule it (weekdays 9 AM & 3 PM) |
+- **`setup-git-config.ps1`** (PowerShell) — configure global Git identity
+  and recommended settings.
+- **`setup-git-config.bat`** (Batch/CMD) — same as above, for environments
+  where PowerShell is restricted.
+- **`new-feature-branch.ps1`** (PowerShell) — prompt for branch type/name,
+  pull latest main/master, create and push the branch.
+- **`sync-main.ps1`** (PowerShell) — safely sync local main/master with the
+  remote at the start of the day.
+- **`sandbox-timestamp.ps1`** (PowerShell) — overwrite `sandbox/last-run.txt`
+  with the current timestamp, commit & push. Use `-Register` to schedule it
+  (weekdays 9 AM & 3 PM).
 
 ## `bash/`
 
-For developers who prefer **Git Bash** (bundled with Git for Windows). These are a
-personal fast-sync shortcut — for team work, use the Pull Request flow in
-[`docs/05-pull-requests.md`](../docs/05-pull-requests.md).
+For developers who prefer **Git Bash** (bundled with Git for Windows).
+These are a personal fast-sync shortcut — for team work, use the Pull
+Request flow in [`docs/05-pull-requests.md`](../docs/05-pull-requests.md).
 
-| Script | Shell | Purpose |
-|---|---|---|
-| `git-commit-and-sync.sh` | Git Bash | Stage all changes, commit with a Conventional Commits message, then sync branches |
-| `git-sync-branches.sh` | Git Bash | Fetch, fast-forward merge an integration branch into the default branch (main/master), and push |
+- **`git-commit-and-sync.sh`** (Git Bash) — stage all changes, commit with a
+  Conventional Commits message, then sync branches.
+- **`git-sync-branches.sh`** (Git Bash) — fetch, fast-forward merge an
+  integration branch into the default branch (main/master), and push.
 
 Both scripts auto-detect `main` vs `master` and accept optional branch arguments:
 
@@ -46,6 +51,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 Then run a script:
+
 ```powershell
 cd scripts\windows
 .\setup-git-config.ps1
@@ -54,6 +60,7 @@ cd scripts\windows
 ## How to Run Batch Scripts
 
 Double-click the `.bat` file, or run from Command Prompt:
+
 ```cmd
 cd scripts\windows
 setup-git-config.bat
@@ -62,6 +69,7 @@ setup-git-config.bat
 ## How to Run Bash Scripts
 
 Open **Git Bash** (right-click in a folder → "Git Bash Here"), then:
+
 ```bash
 cd scripts/bash
 
@@ -73,6 +81,7 @@ bash git-commit-and-sync.sh
 ```
 
 If you get a `Permission denied` error, restore the executable bit:
+
 ```bash
 chmod +x scripts/bash/*.sh
 ```
@@ -90,6 +99,7 @@ and never disturbs your uncommitted work.
 
 **1. Set your repo path.** Either edit the `$RepoPath` default at the top of the
 script, or always pass it explicitly:
+
 ```powershell
 cd scripts\windows
 .\sandbox-timestamp.ps1 -RepoPath "C:\Users\you\Dev\github\git-ops-guide"
@@ -100,11 +110,13 @@ non-interactive, so credentials must be cached first — run `gh auth login` onc
 or `git config --global credential.helper manager` (see `setup-git-config.ps1`).
 
 **3. Register the schedule (weekdays at 9:00 AM and 3:00 PM):**
+
 ```powershell
 .\sandbox-timestamp.ps1 -Register -RepoPath "C:\Users\you\Dev\github\git-ops-guide"
 ```
 
 Manage the task:
+
 ```powershell
 Start-ScheduledTask     -TaskName "GitOps-SandboxTimestamp"   # run now to test
 Get-ScheduledTask       -TaskName "GitOps-SandboxTimestamp"   # view it

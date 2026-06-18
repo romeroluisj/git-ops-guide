@@ -6,9 +6,11 @@
 
 ## What Causes a Merge Conflict?
 
-A merge conflict happens when two branches modify the **same lines** in the same file, and Git cannot automatically decide which version to keep.
+A merge conflict happens when two branches modify the **same lines** in the
+same file, and Git cannot automatically decide which version to keep.
 
 Common triggers:
+
 - Two people edit the same file on different branches.
 - One person edits a file while another deletes it.
 - Long-lived branches that diverge too far from `main`.
@@ -33,7 +35,7 @@ git status
 
 ## What a Conflict Looks Like in a File
 
-```
+```text
 <<<<<<< HEAD
 string greeting = "Hello";
 =======
@@ -117,11 +119,13 @@ git mergetool
 1. **Keep branches short-lived.** Merge feature branches within a few days.
 2. **Pull before you branch.** Always `git pull` on `main` before creating a branch.
 3. **Sync frequently.** Rebase or merge `main` into your branch regularly.
-4. **Communicate.** If two people need to work on the same file, coordinate to avoid overlap.
+4. **Communicate.** If two people need to work on the same file, coordinate
+   to avoid overlap.
 5. **Keep PRs small.** Smaller PRs = fewer conflicts and faster reviews.
 
 ---
 
 ## References
+
 - [GitHub Docs — Resolving a merge conflict using the command line](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-using-the-command-line)
 - [VS Code Docs — Using Git source control](https://code.visualstudio.com/docs/sourcecontrol/overview)

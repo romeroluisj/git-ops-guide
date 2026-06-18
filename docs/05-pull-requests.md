@@ -6,7 +6,9 @@
 
 ## What Is a Pull Request?
 
-A Pull Request (PR) is a request to merge your branch into another branch (usually `main` or `master`). It is the primary code review mechanism in GitHub and Azure DevOps.
+A Pull Request (PR) is a request to merge your branch into another branch
+(usually `main` or `master`). It is the primary code review mechanism in
+GitHub and Azure DevOps.
 
 ---
 
@@ -50,7 +52,7 @@ gh pr create --web
 
 Use this as your personal checklist before submitting a PR:
 
-```
+```text
 [ ] Branch is up to date with main/master (no conflicts)
 [ ] Code compiles and all tests pass locally
 [ ] Commit messages are clear and follow convention
@@ -67,6 +69,7 @@ Use this as your personal checklist before submitting a PR:
 ## Branch Protection / Branch Policies
 
 ### GitHub — Branch Protection Rules
+
 Go to **Settings → Branches → Add rule** on `main`:
 
 | Setting | Recommended value |
@@ -79,6 +82,7 @@ Go to **Settings → Branches → Add rule** on `main`:
 | Restrict who can push to matching branches | ✅ Enabled (admins only) |
 
 ### Azure DevOps — Branch Policies
+
 Go to **Repos → Branches → `main` → Branch policies**:
 
 | Policy | Recommended value |
@@ -99,7 +103,8 @@ Go to **Repos → Branches → `main` → Branch policies**:
 | **Squash and merge** | No (single commit) | No | Clean main history |
 | **Rebase and merge** | No | Yes (replayed) | Linear history |
 
-> **Team tip:** Pick one strategy and enforce it through branch policies to keep history consistent.
+> **Team tip:** Pick one strategy and enforce it through branch policies to
+> keep history consistent.
 
 ---
 
@@ -131,15 +136,19 @@ gh pr close 42
 ## Linking a PR to an Azure Work Item
 
 In the PR description or commit message, use:
-```
+
+```text
 Fixes AB#1234
 Relates to AB#5678
 ```
-Replace `1234` with the Azure Boards work item ID. Azure DevOps will automatically link them.
+
+Replace `1234` with the Azure Boards work item ID. Azure DevOps will
+automatically link them.
 
 ---
 
 ## References
+
 - [GitHub Docs — About pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
 - [Azure DevOps — Review code with pull requests](https://learn.microsoft.com/en-us/azure/devops/repos/git/pull-requests)
 - [Azure DevOps — Branch policies](https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies)

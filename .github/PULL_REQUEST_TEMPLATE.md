@@ -1,3 +1,4 @@
+<!-- markdownlint-disable-file MD041 -->
 ## Summary
 
 <!-- Describe what this PR does and why. -->
@@ -5,7 +6,7 @@
 ## Changes Made
 
 <!-- List the key changes. -->
-- 
+-
 
 ## Type of Change
 
@@ -23,7 +24,8 @@
 - [ ] Tests pass locally
 - [ ] No debug code, console logs, or commented-out code left behind
 - [ ] No secrets, passwords, or API keys committed
-- [ ] Commit messages are clear and follow convention (`feat:`, `fix:`, `docs:`, etc.)
+- [ ] Commit messages are clear and follow convention
+      (`feat:`, `fix:`, `docs:`, etc.)
 - [ ] Relevant documentation updated (if applicable)
 
 ## Linked Issue / Work Item

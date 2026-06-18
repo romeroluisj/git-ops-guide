@@ -7,18 +7,24 @@
 ## 1. Install Git on Windows
 
 ### Option A — winget (recommended, Windows 10/11)
+
 ```powershell
 winget install --id Git.Git -e --source winget
 ```
+
 Restart your terminal after installation.
 
 ### Option B — Manual installer
+
 Download from [gitforwindows.org](https://gitforwindows.org/). During setup:
+
 - Choose **"Git from the command line and also from 3rd-party software"**
 - Choose **"Use Visual Studio Code as Git's default editor"** (if you use VS Code)
-- Choose **"Checkout Windows-style, commit Unix-style line endings"** (recommended for teams)
+- Choose **"Checkout Windows-style, commit Unix-style line endings"**
+  (recommended for teams)
 
 ### Verify installation
+
 ```powershell
 git --version
 ```
@@ -54,6 +60,7 @@ git config --global status.showUntrackedFiles all
 ```
 
 ### Verify your config
+
 ```powershell
 git config --global --list
 ```
@@ -64,17 +71,22 @@ Config is stored at `C:\Users\<YourName>\.gitconfig`.
 
 ## 3. Authentication: SSH vs HTTPS
 
-| Method | Best for | Requires |
-|---|---|---|
-| **SSH** | Daily use, no password prompts | One-time key setup |
-| **HTTPS** | Quick one-off clones, CI/CD | Username + PAT each time (or credential manager) |
+- **SSH** — best for daily use, no password prompts. Requires one-time key
+  setup.
+- **HTTPS** — best for quick one-off clones and CI/CD. Requires a username
+  and PAT each time (or a credential manager).
 
 ### Recommended: Windows Credential Manager (HTTPS, zero config)
-Git for Windows includes a credential helper that stores tokens in Windows Credential Manager.
+
+Git for Windows includes a credential helper that stores tokens in Windows
+Credential Manager.
+
 ```powershell
 git config --global credential.helper manager
 ```
-The first time you `git push` or `git pull`, a browser window opens to authenticate with GitHub. Credentials are saved automatically.
+
+The first time you `git push` or `git pull`, a browser window opens to
+authenticate with GitHub. Credentials are saved automatically.
 
 ---
 
@@ -91,6 +103,7 @@ Get-Content "$env:USERPROFILE\.ssh\id_ed25519.pub" | Set-Clipboard
 Go to **GitHub → Settings → SSH and GPG keys → New SSH key** and paste it.
 
 ### Test the connection
+
 ```powershell
 ssh -T git@github.com
 # Expected: Hi <username>! You've successfully authenticated...
@@ -100,13 +113,16 @@ ssh -T git@github.com
 
 ## 5. Install Recommended Tools
 
-| Tool | Purpose | Install |
-|---|---|---|
-| [GitHub CLI (`gh`)](https://cli.github.com/) | Create PRs, manage repos from terminal | `winget install --id GitHub.cli` |
-| [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows) | Manage Azure resources and pipelines | `winget install --id Microsoft.AzureCLI` |
-| [VS Code](https://code.visualstudio.com/) | Editor with built-in Git UI | `winget install --id Microsoft.VisualStudioCode` |
+- **[GitHub CLI (`gh`)](https://cli.github.com/)** — create PRs and manage
+  repos from the terminal. Install: `winget install --id GitHub.cli`.
+- **[Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows)**
+  — manage Azure resources and pipelines.
+  Install: `winget install --id Microsoft.AzureCLI`.
+- **[VS Code](https://code.visualstudio.com/)** — editor with built-in Git
+  UI. Install: `winget install --id Microsoft.VisualStudioCode`.
 
 ### Authenticate GitHub CLI
+
 ```powershell
 gh auth login
 # Follow the prompts — choose GitHub.com → HTTPS or SSH → browser auth
@@ -115,6 +131,7 @@ gh auth login
 ---
 
 ## References
+
 - [Git for Windows](https://gitforwindows.org/)
 - [GitHub Docs — Generating SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 - [GitHub CLI Manual](https://cli.github.com/manual/)

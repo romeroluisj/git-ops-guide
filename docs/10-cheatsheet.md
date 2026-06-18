@@ -1,7 +1,9 @@
 # 10 — Git Cheat Sheet
 
-> One-page consolidated reference. All commands work on Windows (PowerShell / Git Bash).
-> **Branch note:** Use `main` for new repos. Existing repos may use `main` or `master` — check with `git branch -r`.
+> One-page consolidated reference. All commands work on Windows
+> (PowerShell / Git Bash).
+> **Branch note:** Use `main` for new repos. Existing repos may use `main`
+> or `master` — check with `git branch -r`.
 
 ---
 
@@ -179,8 +181,8 @@ git push origin --delete v1.0.0                    # Delete remote tag
 
 | Resource | URL |
 |---|---|
-| GitHub Git Cheat Sheet (PDF) | https://training.github.com/downloads/github-git-cheat-sheet.pdf |
-| Pro Git Book (free) | https://git-scm.com/book/en/v2 |
-| GitHub Docs | https://docs.github.com |
-| Azure DevOps Docs | https://learn.microsoft.com/en-us/azure/devops |
-| GitHub CLI Manual | https://cli.github.com/manual |
+| GitHub Git Cheat Sheet (PDF) | <https://training.github.com/downloads/github-git-cheat-sheet.pdf> |
+| Pro Git Book (free) | <https://git-scm.com/book/en/v2> |
+| GitHub Docs | <https://docs.github.com> |
+| Azure DevOps Docs | <https://learn.microsoft.com/en-us/azure/devops> |
+| GitHub CLI Manual | <https://cli.github.com/manual> |

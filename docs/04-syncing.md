@@ -6,12 +6,12 @@
 
 ## Core Concepts
 
-| Command | What it does |
-|---|---|
-| `git fetch` | Downloads changes from remote — does NOT modify your working files |
-| `git pull` | `fetch` + `merge` — updates your current branch |
-| `git pull --rebase` | `fetch` + `rebase` — cleaner history, no extra merge commits |
-| `git push` | Uploads your local commits to the remote |
+- **`git fetch`** — downloads changes from the remote; does NOT modify your
+  working files.
+- **`git pull`** — `fetch` + `merge`; updates your current branch.
+- **`git pull --rebase`** — `fetch` + `rebase`; cleaner history, no extra
+  merge commits.
+- **`git push`** — uploads your local commits to the remote.
 
 ---
 
@@ -44,6 +44,7 @@ git fetch --prune
 ```
 
 After fetching, check what's new:
+
 ```powershell
 git log HEAD..origin/main --oneline
 ```
@@ -73,6 +74,7 @@ git push --all origin
 When `main` has moved forward while you were working on your branch:
 
 ### Option 1 — Merge main into your branch
+
 ```powershell
 git checkout feature/my-feature
 git fetch origin
@@ -82,6 +84,7 @@ git commit
 ```
 
 ### Option 2 — Rebase your branch onto main (cleaner history)
+
 ```powershell
 git checkout feature/my-feature
 git fetch origin
@@ -93,10 +96,13 @@ git rebase --abort
 ```
 
 > **Tip:** After a rebase, if you've already pushed your branch, you'll need to force-push:
+>
 > ```powershell
 > git push --force-with-lease origin feature/my-feature
 > ```
-> Use `--force-with-lease` (not `--force`) — it's safer and won't overwrite others' work.
+>
+> Use `--force-with-lease` (not `--force`) — it's safer and won't overwrite
+> others' work.
 
 ---
 
@@ -171,6 +177,7 @@ For a quick personal sync, this repo ships two Git Bash scripts in
 ---
 
 ## References
+
 - [Git Docs — git fetch](https://git-scm.com/docs/git-fetch)
 - [Git Docs — git pull](https://git-scm.com/docs/git-pull)
 - [Pro Git — Remote Branches](https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches)

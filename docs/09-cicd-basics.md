@@ -6,11 +6,11 @@
 
 ## What Is CI/CD?
 
-| Term | Meaning |
-|---|---|
-| **CI** — Continuous Integration | Automatically build and test every code change |
-| **CD** — Continuous Delivery | Automatically deploy tested code to an environment |
-| **Pipeline** | The automated sequence of steps (build → test → deploy) |
+- **CI — Continuous Integration** — automatically build and test every code
+  change.
+- **CD — Continuous Delivery** — automatically deploy tested code to an
+  environment.
+- **Pipeline** — the automated sequence of steps (build → test → deploy).
 
 ---
 
@@ -19,7 +19,7 @@
 | Concept | Description |
 |---|---|
 | **Workflow** | A YAML file in `.github/workflows/` |
-| **Trigger** | The event that starts a workflow (`push`, `pull_request`, `schedule`, etc.) |
+| **Trigger** | The event that starts a workflow (`push`, `pull_request`, etc.) |
 | **Job** | A group of steps that run on the same runner |
 | **Step** | A single task inside a job (run a command or use an Action) |
 | **Runner** | The machine that executes the job (GitHub-hosted or self-hosted) |
@@ -114,12 +114,14 @@ steps:
 ## Protecting `main` With Required Status Checks
 
 ### GitHub
+
 1. **Settings → Branches → Add rule** on `main`.
 2. Enable **"Require status checks to pass before merging"**.
 3. Search for and select your workflow job name (e.g., `build`).
 4. Enable **"Require branches to be up to date"**.
 
 ### Azure DevOps
+
 1. **Repos → Branches → `main` → Branch policies**.
 2. Under **Build validation**, add your pipeline.
 3. Set **Trigger** to automatic and **Policy requirement** to required.
@@ -135,7 +137,7 @@ jobs:
   deploy:
     runs-on: windows-latest
     environment:
-      name: production        # Requires manual approval (configure in Settings → Environments)
+      name: production  # Manual approval (see Settings → Environments)
       url: https://myapp.azurewebsites.net
 
     steps:
@@ -153,7 +155,7 @@ stages:
     displayName: 'Deploy to Production'
     jobs:
       - deployment: DeployWeb
-        environment: 'production'   # Approvals configured in Azure DevOps Environments UI
+        environment: 'production'   # Approvals set in Azure DevOps UI
         strategy:
           runOnce:
             deploy:
@@ -167,7 +169,7 @@ Configure in **Pipelines → Environments → production → Approvals and check
 
 ## Release Branches Strategy
 
-```
+```text
 main            ← always deployable, protected
  └─ release/1.2.0  ← cut from main when ready to release
      └─ hotfix/1.2.1  ← emergency fixes applied to the release branch
@@ -202,6 +204,7 @@ gh run view <run-id> --log
 ---
 
 ## References
+
 - [GitHub Actions Docs](https://docs.github.com/en/actions)
 - [GitHub Actions — Starter Workflows](https://github.com/actions/starter-workflows)
 - [Azure Pipelines YAML Schema](https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema)

@@ -1,9 +1,12 @@
 # Git Ops Guide
 
-A practical Git/GitHub handbook for Windows developers working with GitHub and Azure DevOps.
+A practical Git/GitHub handbook for Windows developers working with GitHub
+and Azure DevOps.
 
-> **All commands in this repo assume Windows** (PowerShell, Git Bash, or Command Prompt / Batch).
-> Branch note: new repos use `main`; existing repos may use `main` or `master` — always check.
+> **All commands in this repo assume Windows** (PowerShell, Git Bash, or
+> Command Prompt / Batch).
+> Branch note: new repos use `main`; existing repos may use `main` or
+> `master` — always check.
 
 ---
 
@@ -48,7 +51,9 @@ gh pr create --web
 
 ## Practice Sandbox
 
-New to Git? The [`/sandbox`](sandbox/README.md) folder is a safe place to practice the full workflow — clone, branch, commit, push, and open a real Pull Request.
+New to Git? The [`/sandbox`](sandbox/README.md) folder is a safe place to
+practice the full workflow — clone, branch, commit, push, and open a real
+Pull Request.
 
 ---
 
@@ -57,13 +62,16 @@ New to Git? The [`/sandbox`](sandbox/README.md) folder is a safe place to practi
 Ready-to-run scripts for Windows in [`/scripts`](scripts/README.md):
 
 **PowerShell / Batch** (`scripts/windows`):
+
 - `setup-git-config.ps1` / `.bat` — configure Git identity on a new machine
 - `new-feature-branch.ps1` — interactive branch creator
 - `sync-main.ps1` — safely sync main/master at the start of the day
 
 **Git Bash** (`scripts/bash`):
+
 - `git-commit-and-sync.sh` — stage, commit (Conventional Commits), then sync branches
-- `git-sync-branches.sh` — fast-forward an integration branch into main/master and push
+- `git-sync-branches.sh` — fast-forward an integration branch into
+  main/master and push
 
 ---
 
