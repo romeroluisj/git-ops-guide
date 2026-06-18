@@ -1,5 +1,7 @@
 # sandbox-timestamp.ps1
-# Writes current date/time to sandbox/last-run.txt, commits & pushes.
+# Writes current date/time to sandbox/last-run.txt on main, then commits & pushes.
+# Always targets main via an isolated, detached worktree, so it works no matter
+# which branch your repo is on and never touches your uncommitted work.
 # Run with -Register to schedule it (weekdays 9AM & 3PM); without it to do the work.
 # Usage: .\sandbox-timestamp.ps1 [-Register] -RepoPath "C:\path\to\git-ops-guide"
 #
@@ -13,6 +15,7 @@ param(
     # Set this to your local repo path (or pass -RepoPath).
     [string]$RepoPath = "C:\Users\$env:USERNAME\Dev\github\git-ops-guide",
     [string]$FileName = "last-run.txt",
+    [string]$Branch   = "main",
     [string]$TaskName = "GitOps-SandboxTimestamp"
 )
 
@@ -39,21 +42,30 @@ if (-not (Test-Path -LiteralPath (Join-Path $RepoPath ".git"))) {
     Write-Host "ERROR: '$RepoPath' is not a Git repo. Edit -RepoPath." -ForegroundColor Red
     exit 1
 }
-Set-Location -LiteralPath $RepoPath
 
-$sandbox = Join-Path $RepoPath "sandbox"
+# Dedicated worktree (in AppData) detached at origin/main: isolated from your
+# normal checkout, so the current branch and any uncommitted work are untouched.
+$wt = Join-Path $env:LOCALAPPDATA ((Split-Path $RepoPath -Leaf) + "-timestamp-wt")
+git -C $RepoPath fetch origin $Branch
+git -C $RepoPath worktree prune
+if (-not (Test-Path -LiteralPath $wt)) {
+    git -C $RepoPath worktree add --detach $wt "origin/$Branch" | Out-Null
+}
+git -C $wt fetch origin $Branch
+git -C $wt reset --hard "origin/$Branch"
+
+$sandbox = Join-Path $wt "sandbox"
 if (-not (Test-Path -LiteralPath $sandbox)) { New-Item -ItemType Directory -Path $sandbox | Out-Null }
 
 $offset = (Get-Date -Format "zzz") -replace ":", ""
 $line   = "updated on " + (Get-Date -Format "yyyy-MM-dd HH:mm:ss") + " $offset"
-$rel    = "sandbox/$FileName"
 Set-Content -LiteralPath (Join-Path $sandbox $FileName) -Value $line -Encoding UTF8
 
-git add -- $rel
-git diff --cached --quiet
+git -C $wt add -- "sandbox/$FileName"
+git -C $wt diff --cached --quiet
 if ($LASTEXITCODE -eq 0) { Write-Host "No change." -ForegroundColor Green; exit 0 }
 
-git commit -m ("chore: update sandbox timestamp " + (Get-Date -Format "yyyy-MM-dd HH:mm"))
-git push
+git -C $wt commit -m ("chore: update sandbox timestamp " + (Get-Date -Format "yyyy-MM-dd HH:mm")) | Out-Null
+git -C $wt push origin "HEAD:$Branch"
 if ($LASTEXITCODE -ne 0) { Write-Host "ERROR: push failed (check cached credentials)." -ForegroundColor Red; exit 1 }
-Write-Host "Pushed: $line" -ForegroundColor Green
+Write-Host "Pushed to ${Branch}: $line" -ForegroundColor Green

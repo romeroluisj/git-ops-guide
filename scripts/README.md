@@ -84,6 +84,10 @@ into `sandbox/last-run.txt`, then commits and pushes it. It creates the `sandbox
 folder if missing and targets the repo given by `-RepoPath`. One script does both
 jobs: the timestamp work by default, and the scheduling with `-Register`.
 
+It always commits to **main** via an isolated, detached worktree (kept in
+`%LOCALAPPDATA%`), so it works no matter which branch your repo is currently on
+and never disturbs your uncommitted work.
+
 **1. Set your repo path.** Either edit the `$RepoPath` default at the top of the
 script, or always pass it explicitly:
 ```powershell
