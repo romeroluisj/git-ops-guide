@@ -6,7 +6,7 @@
 > on a schedule. Each run writes the date/time to `sandbox/last-run.txt`
 > in your local repo and pushes it to the remote `main` branch.
 > Only affects remote main; local untouched. Uses git worktree for isolation.
-> Steps 1-2 are file operations.Steps 3-5 use PowerShell.
+> Steps 1-2 are file operations. Steps 3-5 use PowerShell.
 
 ## 1. Copy the script
 
