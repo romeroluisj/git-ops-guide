@@ -10,8 +10,7 @@ Automation scripts for Windows developers. All scripts require **Git for Windows
 | `setup-git-config.bat` | Batch (CMD) | Same as above — for environments where PowerShell is restricted |
 | `new-feature-branch.ps1` | PowerShell | Prompt for branch type/name, pull latest main/master, create and push branch |
 | `sync-main.ps1` | PowerShell | Safely sync local main/master with remote at the start of the day |
-| `update-sandbox-timestamp.ps1` | PowerShell | Overwrite `sandbox/last-run.txt` with the current timestamp, then commit and push |
-| `register-timestamp-task.ps1` | PowerShell | Register a Task Scheduler job to run the timestamp script weekdays at 9 AM & 3 PM |
+| `sandbox-timestamp.ps1` | PowerShell | Overwrite `sandbox/last-run.txt` with the current timestamp, commit & push. Use `-Register` to schedule it (weekdays 9 AM & 3 PM) |
 
 ## `bash/`
 
@@ -80,15 +79,16 @@ chmod +x scripts/bash/*.sh
 
 ## Scheduled Timestamp (Windows Task Scheduler)
 
-`update-sandbox-timestamp.ps1` writes a single line (`updated on <date time -0700>`)
+`sandbox-timestamp.ps1` writes a single line (`updated on <date time -0700>`)
 into `sandbox/last-run.txt`, then commits and pushes it. It creates the `sandbox`
-folder if missing and targets the repo given by `-RepoPath`.
+folder if missing and targets the repo given by `-RepoPath`. One script does both
+jobs: the timestamp work by default, and the scheduling with `-Register`.
 
 **1. Set your repo path.** Either edit the `$RepoPath` default at the top of the
 script, or always pass it explicitly:
 ```powershell
 cd scripts\windows
-.\update-sandbox-timestamp.ps1 -RepoPath "C:\Users\you\Dev\github\git-ops-guide"
+.\sandbox-timestamp.ps1 -RepoPath "C:\Users\you\Dev\github\git-ops-guide"
 ```
 
 **2. Make sure git can push without prompting.** The scheduled run is
@@ -97,7 +97,7 @@ or `git config --global credential.helper manager` (see `setup-git-config.ps1`).
 
 **3. Register the schedule (weekdays at 9:00 AM and 3:00 PM):**
 ```powershell
-.\register-timestamp-task.ps1 -RepoPath "C:\Users\you\Dev\github\git-ops-guide"
+.\sandbox-timestamp.ps1 -Register -RepoPath "C:\Users\you\Dev\github\git-ops-guide"
 ```
 
 Manage the task:
