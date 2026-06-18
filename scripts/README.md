@@ -79,6 +79,9 @@ chmod +x scripts/bash/*.sh
 
 ## Scheduled Timestamp (Windows Task Scheduler)
 
+> Full step-by-step team guide (copy to any folder, run, and schedule on a
+> Windows 11 Enterprise PC): [`docs/11-scheduled-timestamp.md`](../docs/11-scheduled-timestamp.md).
+
 `sandbox-timestamp.ps1` writes a single line (`updated on <date time -0700>`)
 into `sandbox/last-run.txt`, then commits and pushes it. It creates the `sandbox`
 folder if missing and targets the repo given by `-RepoPath`. One script does both

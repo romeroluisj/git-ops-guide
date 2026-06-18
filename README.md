@@ -22,6 +22,7 @@ A practical Git/GitHub handbook for Windows developers working with GitHub and A
 | 08 | [Azure DevOps](docs/08-azure-devops.md) | Azure Repos, branch policies, Azure CLI |
 | 09 | [CI/CD Basics](docs/09-cicd-basics.md) | GitHub Actions, Azure Pipelines, environments |
 | 10 | [Cheat Sheet](docs/10-cheatsheet.md) | Consolidated one-page command reference |
+| 11 | [Scheduled Timestamp](docs/11-scheduled-timestamp.md) | Copy & schedule `sandbox-timestamp.ps1` to auto-push on weekdays at 9 AM & 3 PM |
 
 ---
 
