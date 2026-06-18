@@ -5,6 +5,7 @@
 > Runs [`sandbox-timestamp.ps1`](../scripts/windows/sandbox-timestamp.ps1)
 > on a schedule. Each run writes the date/time to `sandbox/last-run.txt`
 > in your local repo and pushes it to the remote `main` branch.
+> Only affects remote main; local untouched. Uses git worktree for isolation.
 
 ## 1. Copy the script
 
@@ -51,11 +52,11 @@ Success prints `Pushed to main: ...` (or `No change.`). Verify
 
 ## 5. Make it run automatically
 
-Registers a Task Scheduler task (weekdays 9:00 AM & 3:00 PM):
+Registers a Task Scheduler task (weekdays 9:00 AM & 3:00 PM) for the repo
+configured in the script (step 2):
 
 ```powershell
-.\sandbox-timestamp.ps1 -Register `
-  -RepoPath "C:\Users\$env:USERNAME\path\to\your\local_repo_name"
+.\sandbox-timestamp.ps1 -Register
 ```
 
 Manage it:
@@ -63,7 +64,8 @@ Manage it:
 ```powershell
 Start-ScheduledTask      -TaskName "GitOps-SandboxTimestamp"   # run now
 Get-ScheduledTaskInfo    -TaskName "GitOps-SandboxTimestamp"   # next run
-Unregister-ScheduledTask -TaskName "GitOps-SandboxTimestamp" -Confirm:$false
+Unregister-ScheduledTask -TaskName "GitOps-SandboxTimestamp" `
+  -Confirm:$false   # delete
 ```
 
 Done.
