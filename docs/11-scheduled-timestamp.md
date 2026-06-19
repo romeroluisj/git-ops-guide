@@ -6,7 +6,35 @@
 > on a schedule. Each run writes the date/time to `sandbox/last-run.txt`
 > in your local repo and pushes it to the remote `main` branch.
 > Only affects remote main; local untouched. Uses git worktree for isolation.
-> Steps 1-2 are file operations. Steps 3-5 use PowerShell.
+
+## Easy path: run the installer
+
+For most users, use the one-time installer
+[`folder_name/file_name.ps1`](../scripts/windows/folder_name/file_name.ps1).
+It does everything below automatically.
+
+In PowerShell, from the folder that contains the installer:
+
+```powershell
+.\file_name.ps1
+```
+
+It will:
+
+- copy `sandbox-timestamp.ps1` into `C:\Tools`
+- allow local scripts (RemoteSigned, current user)
+- ask for your local repo folder **once** (picker or paste), then save it
+- run once so you can confirm the push to remote `main`
+- on your `y`/`n`, register the weekday 9 AM & 3 PM task
+
+The repo path is saved to a config file
+(`%LOCALAPPDATA%\sandbox-timestamp\config.json`). Every later run — manual
+or scheduled — reads it, so you are never prompted again. You still need
+cached git credentials (see step 3 below) so pushes work unattended.
+
+---
+
+The manual steps below do the same thing by hand.
 
 ## 1. Copy the script
 
@@ -14,11 +42,19 @@ Copy `sandbox-timestamp.ps1` to any folder. Recommended: `C:\Tools`.
 
 ## 2. Set the local repo path
 
-Open the script and set `$RepoPath` to your local clone. Its
-`origin` is the remote that receives the push.
+The script resolves the repo path in this order:
+
+1. `-RepoPath` argument (explicit override)
+2. saved config file (`%LOCALAPPDATA%\sandbox-timestamp\config.json`)
+3. built-in default
+
+To save it once, write the config file:
 
 ```powershell
-[string]$RepoPath = "C:\Users\$env:USERNAME\path\to\your\local_repo_name"
+$cfg = "$env:LOCALAPPDATA\sandbox-timestamp\config.json"
+New-Item -ItemType Directory -Force -Path (Split-Path $cfg) | Out-Null
+'{ "RepoPath": "C:\\Users\\you\\path\\to\\your\\repo" }' |
+  Set-Content -LiteralPath $cfg -Encoding UTF8
 ```
 
 ## 3. One-time setup (PowerShell)
@@ -34,7 +70,7 @@ git config --global credential.helper manager
 
 ## 4. Run once to confirm (PowerShell)
 
-If you edited `$RepoPath` in the script (step 2):
+Using the saved config (step 2):
 
 ```powershell
 cd C:\Tools
@@ -53,8 +89,8 @@ Success prints `Pushed to main: ...` (or `No change.`). Verify
 
 ## 5. Make it run automatically (PowerShell)
 
-Registers a Task Scheduler task (weekdays 9:00 AM & 3:00 PM) for the repo
-configured in the script (step 2):
+Registers a Task Scheduler task (weekdays 9:00 AM & 3:00 PM). The task
+reads the saved config at run time:
 
 ```powershell
 .\sandbox-timestamp.ps1 -Register
