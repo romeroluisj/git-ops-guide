@@ -10,7 +10,7 @@
 - Script that does the work:
   [`scripts/windows/AutoPushTask/sandbox-timestamp.ps1`](../scripts/windows/AutoPushTask/sandbox-timestamp.ps1)
 - Manual instructions it automates:
-  [`docs/11-scheduled-timestamp.md`](11-scheduled-timestamp.md)
+  [`scripts/windows/AutoPushTask/README.md`](../scripts/windows/AutoPushTask/README.md)
 
 ## What the user wants (captured)
 
@@ -22,7 +22,7 @@ Running it should do everything automatically:
 2. Place itself / its payload into `C:\Tools`.
 3. Write out `sandbox-timestamp.ps1` (and optionally the doc) into a
    known folder.
-4. Run all steps from `11-scheduled-timestamp.md` automatically.
+4. Run all steps from `AutoPushTask/README.md` automatically.
 5. For step 2 (repo path), prompt the user to either:
    - paste the local repo path in the console, OR
    - browse/select the local repo folder via Windows Explorer dialog.
@@ -58,9 +58,10 @@ Running it should do everything automatically:
 - **Artifact:** `AutoPushTask/Install-AutoPushTask.ps1`.
 - **Distribution:** placed on a shared job/work page; team downloads the
   folder/file to their personal Windows 11 Enterprise computers.
-- **Doc copy:** NO local copy of `11-scheduled-timestamp.md`. The
-  installer performs every step automatically, so the doc stays online
-  in GitHub as reference only.
+- **Doc location:** the guide is the canonical `AutoPushTask/README.md`,
+  shipped inside the folder so the bundle is self-contained. The old
+  `docs/11-scheduled-timestamp.md` is now a thin pointer to it (single
+  source of truth, no duplicated content).
 - **Format:** PowerShell `.ps1` (no `.exe`). Simplest and guaranteed to
   run on Windows 11 Enterprise.
 
@@ -107,6 +108,6 @@ Running it should do everything automatically:
 
 ## Follow-up (not in this change)
 
-- `docs/11-scheduled-timestamp.md` describes the manual path and the old
-  `$RepoPath` default. It should later be updated to mention the config
-  file + installer. Out of scope for the first installer build.
+- `AutoPushTask/README.md` (canonical guide) documents both the installer
+  and the manual path with the config file. `docs/11-scheduled-timestamp.md`
+  is now a thin pointer to it.

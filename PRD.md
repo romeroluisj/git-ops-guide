@@ -105,7 +105,8 @@ git-ops-guide/
 │   │   ├── sync-main.ps1           ← PowerShell: sync local main with remote
 │   │   ├── AutoPushTask/           ← self-contained sandbox-timestamp bundle
 │   │   │   ├── Install-AutoPushTask.ps1  ← installer (copies worker + schedules)
-│   │   │   └── sandbox-timestamp.ps1     ← worker: timestamp + commit/push/schedule
+│   │   │   ├── sandbox-timestamp.ps1     ← worker: timestamp + commit/push/schedule
+│   │   │   └── README.md                 ← guide for this bundle (canonical)
 │   │   └── setup-git-config.bat    ← Batch equivalent of setup-git-config
 │   ├── bash/
 │   │   ├── git-commit-and-sync.sh  ← Git Bash: stage, commit, then sync branches
