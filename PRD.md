@@ -104,6 +104,8 @@ git-ops-guide/
 │   │   ├── new-feature-branch.ps1  ← PowerShell: create & push a feature branch
 │   │   ├── sync-main.ps1           ← PowerShell: sync local main with remote
 │   │   ├── sandbox-timestamp.ps1   ← PowerShell: sandbox timestamp + schedule
+│   │   ├── AutoPushTask/
+│   │   │   └── Install-AutoPushTask.ps1  ← installer for sandbox-timestamp
 │   │   └── setup-git-config.bat    ← Batch equivalent of setup-git-config
 │   ├── bash/
 │   │   ├── git-commit-and-sync.sh  ← Git Bash: stage, commit, then sync branches
@@ -113,7 +115,8 @@ git-ops-guide/
 └── .github/
     ├── PULL_REQUEST_TEMPLATE.md    ← standard PR checklist template
     └── workflows/
-        └── validate-docs.yml       ← CI: lint markdown on push/PR
+        ├── validate-docs.yml       ← CI: lint markdown on push/PR
+        └── auto-delete-branch.yml  ← CI: delete branch after PR merge
 ```
 
 ---

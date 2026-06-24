@@ -16,6 +16,10 @@ Automation scripts for Windows developers. All scripts require
 - **`sandbox-timestamp.ps1`** (PowerShell) — overwrite `sandbox/last-run.txt`
   with the current timestamp, commit & push. Use `-Register` to schedule it
   (weekdays 9 AM & 3 PM).
+- **`AutoPushTask/Install-AutoPushTask.ps1`** (PowerShell) — one-time
+  installer that copies `sandbox-timestamp.ps1` to `C:\Tools`, asks for your
+  repo path once (saved to a config file), runs it once, then registers the
+  schedule. Easiest way to set up `sandbox-timestamp.ps1`.
 
 ## `bash/`
 
@@ -97,8 +101,21 @@ It always commits to **main** via an isolated, detached worktree (kept in
 `%LOCALAPPDATA%`), so it works no matter which branch your repo is currently on
 and never disturbs your uncommitted work.
 
-**1. Set your repo path.** Either edit the `$RepoPath` default at the top of the
-script, or always pass it explicitly:
+**Easiest: run the installer.** `AutoPushTask\Install-AutoPushTask.ps1` does all
+the steps below for you (prompts for the repo path once, saves it, runs once,
+registers the schedule):
+
+```powershell
+cd scripts\windows\AutoPushTask
+.\Install-AutoPushTask.ps1
+```
+
+To do it manually instead:
+
+**1. Set your repo path.** The script resolves it by precedence: `-RepoPath`
+argument, then the saved config file
+(`%LOCALAPPDATA%\sandbox-timestamp\config.json`), then a built-in default. Pass
+it explicitly:
 
 ```powershell
 cd scripts\windows
@@ -109,10 +126,11 @@ cd scripts\windows
 non-interactive, so credentials must be cached first — run `gh auth login` once,
 or `git config --global credential.helper manager` (see `setup-git-config.ps1`).
 
-**3. Register the schedule (weekdays at 9:00 AM and 3:00 PM):**
+**3. Register the schedule (weekdays at 9:00 AM and 3:00 PM).** The task reads
+the saved config at run time:
 
 ```powershell
-.\sandbox-timestamp.ps1 -Register -RepoPath "C:\Users\you\Dev\github\git-ops-guide"
+.\sandbox-timestamp.ps1 -Register
 ```
 
 Manage the task:
