@@ -2,7 +2,7 @@
 
 > **Platform:** Windows 11 Enterprise | **Shell:** PowerShell
 >
-> Runs [`sandbox-timestamp.ps1`](../scripts/windows/sandbox-timestamp.ps1)
+> Runs [`sandbox-timestamp.ps1`](../scripts/windows/AutoPushTask/sandbox-timestamp.ps1)
 > on a schedule. Each run writes the date/time to `sandbox/last-run.txt`
 > in your local repo and pushes it to the remote `main` branch.
 > Only affects remote main; local untouched. Uses git worktree for isolation.

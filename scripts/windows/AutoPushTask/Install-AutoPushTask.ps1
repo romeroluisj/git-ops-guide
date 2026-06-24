@@ -30,8 +30,8 @@ function Write-Step($msg) { Write-Host "==> $msg" -ForegroundColor Cyan }
 $ScriptDir = Split-Path -Parent $PSCommandPath
 $workerSource = $null
 foreach ($candidate in @(
-    (Join-Path $ScriptDir $WorkerName),            # same folder (distributed layout)
-    (Join-Path (Split-Path -Parent $ScriptDir) $WorkerName)  # parent (repo layout)
+    (Join-Path $ScriptDir $WorkerName),            # same folder (normal, self-contained layout)
+    (Join-Path (Split-Path -Parent $ScriptDir) $WorkerName)  # parent (fallback)
 )) {
     if (Test-Path -LiteralPath $candidate) { $workerSource = $candidate; break }
 }

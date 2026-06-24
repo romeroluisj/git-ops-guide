@@ -103,9 +103,9 @@ git-ops-guide/
 │   │   ├── setup-git-config.ps1    ← PowerShell: configure global git identity
 │   │   ├── new-feature-branch.ps1  ← PowerShell: create & push a feature branch
 │   │   ├── sync-main.ps1           ← PowerShell: sync local main with remote
-│   │   ├── sandbox-timestamp.ps1   ← PowerShell: sandbox timestamp + schedule
-│   │   ├── AutoPushTask/
-│   │   │   └── Install-AutoPushTask.ps1  ← installer for sandbox-timestamp
+│   │   ├── AutoPushTask/           ← self-contained sandbox-timestamp bundle
+│   │   │   ├── Install-AutoPushTask.ps1  ← installer (copies worker + schedules)
+│   │   │   └── sandbox-timestamp.ps1     ← worker: timestamp + commit/push/schedule
 │   │   └── setup-git-config.bat    ← Batch equivalent of setup-git-config
 │   ├── bash/
 │   │   ├── git-commit-and-sync.sh  ← Git Bash: stage, commit, then sync branches

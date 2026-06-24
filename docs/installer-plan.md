@@ -8,7 +8,7 @@
 ## Source files this wraps
 
 - Script that does the work:
-  [`scripts/windows/sandbox-timestamp.ps1`](../scripts/windows/sandbox-timestamp.ps1)
+  [`scripts/windows/AutoPushTask/sandbox-timestamp.ps1`](../scripts/windows/AutoPushTask/sandbox-timestamp.ps1)
 - Manual instructions it automates:
   [`docs/11-scheduled-timestamp.md`](11-scheduled-timestamp.md)
 
@@ -82,10 +82,10 @@ Running it should do everything automatically:
   it reads the config at run time. Changing the config updates every
   future run — no need to re-register the task.
 - **Packaging:** `AutoPushTask/` contains BOTH `Install-AutoPushTask.ps1`
-  (installer) and `sandbox-timestamp.ps1` (worker). The installer copies
-  the worker
-  to `C:\Tools`. No embedded/duplicated script body — the canonical
-  worker stays at `scripts/windows/sandbox-timestamp.ps1`.
+  (installer) and `sandbox-timestamp.ps1` (worker), so the folder is fully
+  self-contained. The installer copies the worker to `C:\Tools`. No
+  embedded/duplicated script body — the canonical worker lives at
+  `scripts/windows/AutoPushTask/sandbox-timestamp.ps1`.
   - Installer locates the worker: same folder first, then parent folder
     (so it works both in the repo layout and the distributed folder).
 

@@ -13,13 +13,14 @@ Automation scripts for Windows developers. All scripts require
   pull latest main/master, create and push the branch.
 - **`sync-main.ps1`** (PowerShell) — safely sync local main/master with the
   remote at the start of the day.
-- **`sandbox-timestamp.ps1`** (PowerShell) — overwrite `sandbox/last-run.txt`
-  with the current timestamp, commit & push. Use `-Register` to schedule it
-  (weekdays 9 AM & 3 PM).
-- **`AutoPushTask/Install-AutoPushTask.ps1`** (PowerShell) — one-time
-  installer that copies `sandbox-timestamp.ps1` to `C:\Tools`, asks for your
-  repo path once (saved to a config file), runs it once, then registers the
-  schedule. Easiest way to set up `sandbox-timestamp.ps1`.
+- **`AutoPushTask/`** (PowerShell) — self-contained bundle for the scheduled
+  timestamp automation. Contains:
+  - **`Install-AutoPushTask.ps1`** — one-time installer that copies the worker
+    to `C:\Tools`, asks for your repo path once (saved to a config file), runs
+    it once, then registers the schedule. Easiest way to set everything up.
+  - **`sandbox-timestamp.ps1`** — the worker: overwrites `sandbox/last-run.txt`
+    with the current timestamp, commit & push. Use `-Register` to schedule it
+    (weekdays 9 AM & 3 PM).
 
 ## `bash/`
 
@@ -118,7 +119,7 @@ argument, then the saved config file
 it explicitly:
 
 ```powershell
-cd scripts\windows
+cd scripts\windows\AutoPushTask
 .\sandbox-timestamp.ps1 -RepoPath "C:\Users\you\Dev\github\git-ops-guide"
 ```
 
