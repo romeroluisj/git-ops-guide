@@ -55,8 +55,7 @@ Running it should do everything automatically:
 
 ## Decisions (locked for now)
 
-- **Artifact:** `folder_name/file_name.ps1` (placeholder names; rename
-  later).
+- **Artifact:** `AutoPushTask/Install-AutoPushTask.ps1`.
 - **Distribution:** placed on a shared job/work page; team downloads the
   folder/file to their personal Windows 11 Enterprise computers.
 - **Doc copy:** NO local copy of `11-scheduled-timestamp.md`. The
@@ -82,14 +81,15 @@ Running it should do everything automatically:
 - **Scheduled task runs the worker "bare"** (no `-RepoPath` embedded), so
   it reads the config at run time. Changing the config updates every
   future run — no need to re-register the task.
-- **Packaging:** `folder_name/` contains BOTH `file_name.ps1` (installer)
-  and `sandbox-timestamp.ps1` (worker). The installer copies the worker
+- **Packaging:** `AutoPushTask/` contains BOTH `Install-AutoPushTask.ps1`
+  (installer) and `sandbox-timestamp.ps1` (worker). The installer copies
+  the worker
   to `C:\Tools`. No embedded/duplicated script body — the canonical
   worker stays at `scripts/windows/sandbox-timestamp.ps1`.
   - Installer locates the worker: same folder first, then parent folder
     (so it works both in the repo layout and the distributed folder).
 
-## Final flow (installer = file_name.ps1)
+## Final flow (installer = Install-AutoPushTask.ps1)
 
 1. Ensure `C:\Tools` exists (create if missing).
 2. Locate `sandbox-timestamp.ps1` (same dir, else parent dir).

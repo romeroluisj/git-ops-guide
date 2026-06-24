@@ -10,13 +10,13 @@
 ## Easy path: run the installer
 
 For most users, use the one-time installer
-[`folder_name/file_name.ps1`](../scripts/windows/folder_name/file_name.ps1).
+[`AutoPushTask/Install-AutoPushTask.ps1`](../scripts/windows/AutoPushTask/Install-AutoPushTask.ps1).
 It does everything below automatically.
 
 In PowerShell, from the folder that contains the installer:
 
 ```powershell
-.\file_name.ps1
+.\Install-AutoPushTask.ps1
 ```
 
 It will:

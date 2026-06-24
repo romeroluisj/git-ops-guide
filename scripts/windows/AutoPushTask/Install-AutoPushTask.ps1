@@ -1,4 +1,4 @@
-# file_name.ps1 - one-time installer for the sandbox-timestamp automation.
+# Install-AutoPushTask.ps1 - one-time installer for the sandbox-timestamp automation.
 # Platform: Windows 11 Enterprise | Shell: PowerShell
 #
 # What it does (run once, by hand):
@@ -13,7 +13,7 @@
 #      (weekdays 9:00 AM & 3:00 PM). The task reads the saved config.
 #
 # Usage (PowerShell, from the folder that contains this file):
-#   .\file_name.ps1
+#   .\Install-AutoPushTask.ps1
 
 [CmdletBinding()]
 param(
